@@ -25,8 +25,8 @@ void Machine::nextOutput() {
 void Machine::addNextSign() {
 	signs.push_back(nextSign);
 	int length = signs.size();
-	//each sign has a position in the bottom sign belt of the machine
-	//the sequence of the position of the signs is: 0, 1, 4, 6, 11, 14, 21...
+	//each sign has a position represented by an integer>=0
+	//the sequence of the positions of the signs is: 0, 1, 4, 6, 11, 14, 21...
 	//we define sequence of the increments as the sequence of the differences in position between consecutive signs
 	//sequence of the increments: 1, 3, 2, 5, 3, 7...
 	if (length % 2 == 0) {
@@ -34,7 +34,7 @@ void Machine::addNextSign() {
 			nextSign = PlusOrMinus(4, false);
 		else
 			nextSign = PlusOrMinus(
-				//given the sequence of the increments, the subsequence of 2nd, 4th, 6th... terms is:
+				//given the sequence of the increments, the subsequence of 2nd, 4th, 6th, 8th, 10th... terms is:
 				//3, 5, 7, 9, 11...
 				signs[length - 1].getPosition()
 				+ signs[length - 2].getPosition() - signs[length - 3].getPosition()
@@ -44,7 +44,7 @@ void Machine::addNextSign() {
 	}
 	else {
 		nextSign = PlusOrMinus(
-			//given the sequence of the increments, the subsequence of 2nd, 4th, 6th... terms is:
+			//given the sequence of the increments, the subsequence of 1st, 3rd, 5th, 7th, 9th... terms is:
 			//1, 2, 3, 4, 5...
 			signs[length - 1].getPosition()
 			+ signs[length - 2].getPosition() - signs[length - 3].getPosition()
